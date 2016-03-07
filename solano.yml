@@ -11,6 +11,7 @@ environment:
   # 'AWS_SECRET_ACCESS_KEY': '<set-with-cli>'
   # 'AWS_DEFAULT_REGION': '<set-with-cli>'
   # 'AWS_ACCOUNT_ID': '<set-with-cli>'
+  # 'AWS_IAM_ROLE_NAME': '<set-with-cli>'
 
 # See the individual script files for the actions performed by each setup hook.
 # (http://docs.solanolabs.com/Setup/setup-hooks/)

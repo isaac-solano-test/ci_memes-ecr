@@ -44,6 +44,9 @@ sed -e "s;%TDDIUM_SESSION_ID%;$TDDIUM_SESSION_ID;g" ci_memes.json \
   | sed -e "s;%AWS_ACCOUNT_ID%;$AWS_ACCOUNT_ID;g" \
   > ci_memes-${TDDIUM_SESSION_ID}.json
 
+# Use IAM Role (aws_env file created by scripts/solano-pre_setup.sh)
+source aws_env
+
 # Register updated task
 aws ecs register-task-definition --family ci_memes --cli-input-json file://ci_memes-${TDDIUM_SESSION_ID}.json
 

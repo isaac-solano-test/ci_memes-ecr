@@ -36,10 +36,6 @@ if [ -d $HOME/lib/python2.7/site-packages ]; then
   export PYTHONPATH=$HOME/lib/python2.7/site-packages
 fi
 
-# Fetch Amazon ECR generated docker login command and login
-LOGIN_CMD=`aws ecr get-login`
-sudo $LOGIN_CMD
-
 # Push image to Amazon ECR
 sudo docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/ci_memes-ecr:$TDDIUM_SESSION_ID
 

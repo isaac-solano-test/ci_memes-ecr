@@ -34,7 +34,7 @@ LOGIN_CMD=`aws ecr get-login`
 sudo $LOGIN_CMD
 
 # Build the image
-sudo docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/ci_memes:$TDDIUM_SESSION_ID .
+sudo docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/ci_memes-ecr:$TDDIUM_SESSION_ID .
 
 # Install PHP dependencies
 composer install

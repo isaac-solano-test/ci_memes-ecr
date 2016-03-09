@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "ci_memes",
-      "image": "%AWS_ACCOUNT_ID%.dkr.ecr.us-east-1.amazonaws.com/ci_memes:%TDDIUM_SESSION_ID%",
+      "image": "%AWS_ACCOUNT_ID%.dkr.ecr.us-east-1.amazonaws.com/ci_memes-ecr:%TDDIUM_SESSION_ID%",
       "cpu": 100,
       "memory": 256,
       "entryPoint": [

@@ -2,6 +2,7 @@
 # Solano CI post_build hook (http://docs.solanolabs.com/Setup/setup-hooks/)
 
 set -o errexit -o pipefail # Exit on error
+set -x
 
 # Only deploy if all tests have passed
 if [[ "passed" != "$TDDIUM_BUILD_STATUS" ]]; then
@@ -34,6 +35,10 @@ fi
 if [ -d $HOME/lib/python2.7/site-packages ]; then
   export PYTHONPATH=$HOME/lib/python2.7/site-packages
 fi
+
+# Fetch Amazon ECR generated docker login command and login
+LOGIN_CMD=`aws ecr get-login`
+sudo $LOGIN_CMD
 
 # Push image to Amazon ECR
 sudo docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/ci_memes-ecr:$TDDIUM_SESSION_ID

@@ -36,7 +36,7 @@ if [ -d $HOME/lib/python2.7/site-packages ]; then
 fi
 
 # Push image to Amazon ECR
-sudo docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/ci_memes:$TDDIUM_SESSION_ID
+sudo docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/ci_memes-ecr:$TDDIUM_SESSION_ID
 
 
 # Create new task definition from template file
@@ -45,11 +45,11 @@ sed -e "s;%TDDIUM_SESSION_ID%;$TDDIUM_SESSION_ID;g" ci_memes.json \
   > ci_memes-${TDDIUM_SESSION_ID}.json
 
 # Register updated task
-aws ecs register-task-definition --family ci_memes --cli-input-json file://ci_memes-${TDDIUM_SESSION_ID}.json
+aws ecs register-task-definition --family ci_memes-ecr-task --cli-input-json file://ci_memes-${TDDIUM_SESSION_ID}.json
 
 # Get revision number of newly created task definition
-REV=`aws ecs describe-task-definition --task-definition ci_memes | jq '.taskDefinition.revision'`
+REV=`aws ecs describe-task-definition --task-definition ci_memes-ecr-task | jq '.taskDefinition.revision'`
 
 # Update Amazon ECS service to use the new task definition
-aws ecs update-service --cluster default --service ci_memes_service --task-definition ci_memes:${REV}
+aws ecs update-service --cluster default --service ci_memes_service --task-definition ci_memes-ecr-task:${REV}
 
